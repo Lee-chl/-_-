@@ -1,14 +1,17 @@
 //i2c 통신을 위한 라이브러리 불러오기
 #include <Wire.h>
 
+//피에조 부저를 5번 핀에 넣기
 #define PIEZO 5
+//최저 온도를 37.5도로 적용
+#define TEMP_LOW 37.5
 
 //비접촉식 온도 측정 센서 라이브러리 불러오기
 #include <Adafruit_MLX90614.h>
 Adafruit_MLX90614 mlx = Adafruit_MLX90614 ();
 
-
-
+float Temp1;
+float Temp2;
 
 void setup() {
   Serial.begin(9600);
@@ -19,8 +22,6 @@ void setup() {
 }
 
 void loop() {
-  float Temp1;
-  float Temp2;
   //주변 온도를 읽어 온다. 
   Temp1 += mlx.readAmbientTempC();
   //객체 온도 읽어 오기
@@ -33,7 +34,7 @@ void loop() {
   delay(1000);
   
   //37.5도 이상 인 경우 음악이 나옴
-  if(( Temp2 >= 37.5 ))
+  if( Temp2 >= TEMP_LOW )
   {
   //5옥타브 미
   tone(PIEZO, 659);
