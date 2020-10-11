@@ -1,8 +1,8 @@
 //i2c 통신을 위한 라이브러리 불러오기
 #include <Wire.h>
 
-//피에조 부저를 5번 핀에 넣기
-#define PIEZO 5
+//피에조 부저를 13번 핀에 넣기
+#define PIEZO 13
 //최저 온도를 37.5도로 적용
 #define TEMP_LOW 37.5
 
