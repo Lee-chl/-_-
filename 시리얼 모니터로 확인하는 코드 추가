@@ -8,7 +8,7 @@
 
 //비접촉식 온도 측정 센서 라이브러리 불러오기
 #include <Adafruit_MLX90614.h>
-Adafruit_MLX90614 mlx = Adafruit_MLX90614 ();
+Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 
 float Temp1;
 float Temp2;
