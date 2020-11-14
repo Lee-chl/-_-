@@ -1,0 +1,114 @@
+//i2c 통신을 위한 라이브러리 불러오기
+#include <Wire.h>
+
+//피에조 부저를 13번 핀에 넣기
+#define PIEZO 13
+//최저 온도를 37.5도로 적용
+#define TEMP_LOW 37.5
+
+//비접촉식 온도 측정 센서 라이브러리 불러오기
+#include <Adafruit_MLX90614.h>
+
+Adafruit_MLX90614 mlx = Adafruit_MLX90614();
+
+float Temp1;
+float Temp2;
+
+void setup() {
+  Serial.begin(9600);
+  //부저
+  pinMode(PIEZO,OUTPUT);
+  //mlx 모듈을 읽기
+  mlx.begin ();
+}
+
+void loop() {
+  //주변 온도를 읽어 온다. 
+  Temp1 += mlx.readAmbientTempC();
+  //객체 온도 읽어 오기
+  Temp2 += mlx.readObjectTempC();
+  
+  Serial.print("주변온도:");
+  Serial.print(Temp1);
+  Serial.print("객체온도:");  
+  Serial.print(Temp2);
+  delay(1000);
+  
+  //37.5도 이상 인 경우 음악이 나옴
+  if( Temp2 >= TEMP_LOW )
+  {
+  //5옥타브 미
+  tone(PIEZO, 659);
+  delay(500);
+  //5옥타브 미
+  tone(PIEZO, 659);
+  delay(500);
+  noTone(13);
+  
+  //5옥타브 미
+  tone(PIEZO, 659);
+  delay(500);
+  //5옥타브 미
+  tone(PIEZO, 659);
+  delay(500);
+  noTone(13);
+
+
+  
+  //5옥타브 미
+  tone(PIEZO, 659,2000);
+  delay(800);
+
+  //5옥타브 미
+  tone(PIEZO, 659,2000);
+  delay(800);
+  //5옥타브 미
+  tone(PIEZO, 659,2000);
+  delay(800);
+  //5옥타브 미
+  tone(PIEZO, 659);
+  delay(350);
+  //5옥타브 레
+  tone(PIEZO, 587);
+  delay(350);
+  //5옥타브 도
+  tone(PIEZO, 523);
+  delay(350);
+  //4옥타브 시
+  tone(PIEZO, 493);
+  delay(350);
+  //4옥타브 라
+  tone(PIEZO, 440,4000);
+  delay(1000);
+  noTone(13);
+  
+  //5옥타브 미
+  tone(PIEZO, 659);
+  delay(250);
+  //5옥타브 미
+  tone(PIEZO, 659);
+  delay(250);
+  //5옥타브 미
+  tone(PIEZO, 659);
+  delay(250);
+  noTone(13);
+  //5옥타브 미
+  tone(PIEZO, 659);
+  delay(300);
+  //5옥타브 레
+  tone(PIEZO, 587);
+  delay(250);
+  //5옥타브 레
+  tone(PIEZO, 587);
+  delay(250);
+  //5옥타브 도
+  tone(PIEZO, 523);
+  delay(300);
+  //5옥타브 도
+  tone(PIEZO, 523);
+  delay(300);
+  //5옥타브 파
+  tone(PIEZO, 698,4000);
+  delay(1000);
+  }
+}
