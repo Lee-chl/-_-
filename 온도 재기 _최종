@@ -15,6 +15,7 @@ float Temp1;
 float Temp2;
 
 void setup() {
+  //Serial 통신 속도 설정
   Serial.begin(9600);
   //부저
   pinMode(PIEZO,OUTPUT);
